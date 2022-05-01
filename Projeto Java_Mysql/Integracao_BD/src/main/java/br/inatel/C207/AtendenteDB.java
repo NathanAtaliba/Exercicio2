@@ -5,7 +5,11 @@ public class AtendenteDB extends FuncionariosDB {
        super(nome,idade,id);
 
     }
-    void fazerCadastro(PacienteDB paciente){
+    void addCadastro(PacienteDB pacienteA){
+
+
+    }
+    void removerCadastro(PacienteDB pacienteR){
 
 
     }

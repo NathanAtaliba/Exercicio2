@@ -7,4 +7,10 @@ public class PacienteDB {
     public PacienteDB(String nomePaciente, int nivelEmergencia) {
        this.nivelEmergencia = nivelEmergencia;
        this.nomePaciente = nomePaciente;
-    }}
+    }
+public void pedirConsulta(){
+    System.out.println("Pedir consulta");
+
+}
+
+}
