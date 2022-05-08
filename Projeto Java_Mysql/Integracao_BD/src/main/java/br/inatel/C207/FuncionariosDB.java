@@ -1,15 +1,22 @@
 package br.inatel.C207;
 
-public class FuncionariosDB {
+public abstract class FuncionariosDB extends Database {
     private String nome;
     private int idade;
     public int id;
     private String setor;
 
-    public FuncionariosDB(String nome, int idade, int id ) {
+    public FuncionariosDB(String nome, int idade, int id ,String setor ) {
         this.nome = nome;
         this.idade = idade;
+        this.setor = setor;
+        this.id = id;
     }
+
+    public void addCadastro(){};
+    public void removerCadastro(){};
+    public void fazerCirurgia(){};
+    public void mostrarpaciente(){};
 
     public String getSetor() {return setor;}
 

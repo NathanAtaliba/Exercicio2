@@ -1,32 +1,17 @@
 package br.inatel.C207;
-
+import java.util.ArrayList;
 public class Principal {
-
     public static void main(String[] args){
-
-        Database database = new Database();
-        database.connect();
-
-        //criando objetos para serem inseridos no banco
-        User user1 = new User("Davi","111.111.111-11");
-        User user2 = new User("Alexandre","222.222.222-22");
-        User user3 = new User("Paula","333.333.333-33");
-
-        //Inserindo usuários no banco
-        database.insertUser(user1);
-        database.insertUser(user2);
-        database.insertUser(user3);
-
-        //mostrando todos os usuários
-        database.researchUser();
-        System.out.println("-----Atualizando o nome-----");
-        database.updateUser(1,"Davizao");
-
-        database.researchUser();
-
-        System.out.println("-----Excluido usuário-----");
-        database.deleteUser(2);
-        database.researchUser();
-
+        AtendenteDB at1 = new AtendenteDB();
+AtendenteDB atendente1 = new AtendenteDB(1663,"Nathan",16);
+AtendenteDB atendente2 = new AtendenteDB(19,"Julia",20);
+at1.insertAtendente(atendente1);
+at1.insertAtendente(atendente2);
+at1.researchAtendentes();
+at1.updateAtendenteDB("Nathan",1663,21);
+at1.updateAtendenteDB("Nathan",16,21);
+at1.deleteAtendenteDB("Nathan",16,21);
+        //atendente1.deleteAtendenteDB(atendente1.getIdAtendenteDB());
+        at1.researchAtendentes();
     }
 }
