@@ -18,9 +18,9 @@ connect();    //Conectando no banco
 String sql = "INSERT INTO atendenteDB(idAtendenteDB,nome,idade) VALUES(? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO
 try{                    //Comandos utlizados sem o erro
     pst = connection.prepareStatement(sql);   //preparando conexao
-    pst.setInt(1,atendenteDB.getIdAtendenteDB());   //index utilizado para inserir no TEXTO sql(getIdAtendenteDB())
-    pst.setString(2, atendenteDB.getNome());       //index utilizado para inserir no TEXTO sql(getNome())
-    pst.setInt(3,atendenteDB.getIdade());        //index utilizado para inserir no TEXTO sql(getIdade())
+    pst.setInt(1,atendenteDB.getIdAtendenteDB());   // //preparando Query para idAtendenteDB
+    pst.setString(2, atendenteDB.getNome());       // //preparando Query para nome
+    pst.setInt(3,atendenteDB.getIdade());        // //preparando Query para idade
     pst.execute();    // Executar
     check = true;     // passando valor true para check (controle de erro)
 }catch(SQLException e){  // SQLException (Ocorreu erro)
@@ -79,10 +79,10 @@ public boolean updateAtendenteDB(String nome,int idAtendenteDB,int idade){ //atu
 connect();
 String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND idAtendenteDB =?"; //Comando utilizado no Sql transcrevido em TEXTO
 try{
-    pst = connection.prepareStatement(sql);   //preparando conexao
-    pst.setInt(1,idade);     // parametro  da idade para usar no TEXTO do sql
-    pst.setString(2,nome);   // parametro  do nome para usar no TEXTO do sql
-    pst.setInt (3,idAtendenteDB);   // parametro  do idAtendente para usar no TEXTO do sql
+    pst = connection.prepareStatement(sql); //preparando conexao
+    pst.setInt(1,idade);     //preparando Query para idade
+    pst.setString(2,nome);   // preparando Query para nome
+    pst.setInt (3,idAtendenteDB);   //preparando Query para idAtendenteDB
     pst.execute();  //executar
     check = true;  // variavel de controle foi para true
 }catch(SQLException e){  //Se der erro
@@ -105,9 +105,9 @@ connect(); //conexao
 String sql = "DELETE FROM atendenteDB WHERE idAtendenteDB = ? AND nome=? AND idade=?";  //Comando utilizado no Sql transcrevido em TEXTO
 try{
     pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
-    pst.setInt(1,idAtendenteDB);  // parametro usado no texto(idAtendenteDB)
-    pst.setString(2,nome); // parametro usado no texto(nome)
-    pst.setInt(3,idade);   // parametro usado no texto(idade)
+    pst.setInt(1,idAtendenteDB);  //preparando Query para idAtendenteDB
+    pst.setString(2,nome); // preparando Query para nome
+    pst.setInt(3,idade);   // preparando Query para idade
     pst.execute();   // executar
     check = true;  //variavel de controle check
 
@@ -124,17 +124,6 @@ try{
 }
 return check;  //retornar variaveld e controle
 }
-
-
-
-
-
-
-
-
-
-
-
 
     public String getNome() {
         return nome;
