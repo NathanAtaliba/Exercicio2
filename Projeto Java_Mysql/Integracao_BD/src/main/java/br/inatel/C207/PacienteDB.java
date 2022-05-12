@@ -1,19 +1,21 @@
 package br.inatel.C207;
 
-public class PacienteDB {
+public class PacienteDB extends Database {
     private String nomePaciente;
     private String sintomas;
     private int idade;
-    private int id;
+    private int idPaciente;
 
-public PacienteDB(int id){
-    this.id = id;
+public PacienteDB(int idPaciente){
+    this.idPaciente = idPaciente;
 }
-    public PacienteDB(String nomePaciente, String sintomas,int idade,int id) {
+    public PacienteDB(){
+    }
+    public PacienteDB(String nomePaciente, String sintomas,int idade,int idPaciente) {
        this.sintomas = sintomas;
        this.nomePaciente = nomePaciente;
        this.idade = idade;
-       this.id = id;
+       this.idPaciente = idPaciente;
     }
 public void pedirConsulta(){
     System.out.println("Pedir consulta");
@@ -47,11 +49,11 @@ public void removerUsuario(String nomePaciente){
         this.idade = idade;
     }
 
-    public int getId() {
-        return id;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 }
