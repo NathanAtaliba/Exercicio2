@@ -1,4 +1,4 @@
-package br.inatel.C207;
+package br.inatel.C207.DB;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,24 +1,19 @@
-package br.inatel.C207;
+package br.inatel.C207.DB;
+import br.inatel.C207.Class.Paciente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import br.inatel.C207.Class.Atendente;
 public class AtendenteDB extends Database {
-    private String nome;
-    private int idAtendenteDB;
-    private int idade;
-    public AtendenteDB(int idAtendenteDB,String nome,int idade){
-      this.nome = nome;
-      this.idade = idade;
-      this.idAtendenteDB = idAtendenteDB;
-    }
 public AtendenteDB(){}
-public boolean insertAtendente(AtendenteDB atendenteDB){ // Inserindo Atendente no banco de dados
+    public boolean insertAtendente(Atendente atendente){ // Inserindo Atendente no banco de dados
 connect();    //Conectando no banco
-String sql = "INSERT INTO atendenteDB(idAtendenteDB,nome,idade) VALUES(? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO
+String sql = "INSERT INTO atendenteDB(nome,idade,id,setor) VALUES(? ,? ,? , ?)";  //Comando utilizado no Sql transcrevido em TEXTO
 try{                    //Comandos utlizados sem o erro
     pst = connection.prepareStatement(sql);   //preparando conexao
-    pst.setInt(1,atendenteDB.getIdAtendenteDB());   // //preparando Query para idAtendenteDB
-    pst.setString(2, atendenteDB.getNome());       // //preparando Query para nome
-    pst.setInt(3,atendenteDB.getIdade());        // //preparando Query para idade
+    pst.setInt(3,atendente.getId());   // //preparando Query para idAtendenteDB
+    pst.setString(1, atendente.getNome());       //preparando Query para nome
+    pst.setInt(2,atendente.getIdade());         //preparando Query para idade
+    pst.setString(4,atendente.getSetor());  //preparando Query para setor
     pst.execute();    // Executar
     check = true;     // passando valor true para check (controle de erro)
 }catch(SQLException e){  // SQLException (Ocorreu erro)
@@ -36,24 +31,24 @@ pst.close();
 return check;  //retornando check
 }
 
-
-public ArrayList<AtendenteDB> researchAtendentes(){   //selecionar Atendente
+public ArrayList<Atendente> researchAtendentes(){   //selecionar Atendente
 connect();  //conectando
-ArrayList<AtendenteDB> atendentes = new ArrayList<>();  // Criando Array para guardar atendentes
+ArrayList<Atendente> atendentes = new ArrayList<>();  // Criando Array para guardar atendentes
 String sql = "SELECT * FROM AtendenteDB";  //Comando utilizado no Sql transcrevido em TEXTO
 try {
     statement = connection.createStatement();  //Criando variavel para conexao
     result = statement.executeQuery(sql);  // Criando variavel para comparar os resultados
 
     while(result.next()){
-            AtendenteDB atendente = new AtendenteDB ((result.getInt("idAtendenteDB")),(result.getString("nome")),(result.getInt("idade"))); //Criando atendente com resultados para comparar
+            Atendente atendente = new Atendente ((result.getString("nome")),(result.getInt("idade")),(result.getInt("id")),result.getString("setor")); //Criando atendente com resultados para comparar
 
-            atendente.idAtendenteDB = result.getInt("idAtendenteDB");  //igualando o resultado do atendente com o atendente criado
-        atendente.nome = result.getString("nome");       //igualando o resultado do atendente com o atendente criado
-         atendente.idade = result.getInt("idade");       //igualando o resultado do atendente com o atendente criado
-        System.out.println("Nome = "+ atendente.nome);    //mostrando os atributos do atendente
-        System.out.println("Idade = "+atendente.idade);   //mostrando os atributos do atendente
-        System.out.println("ID = "+ atendente.idAtendenteDB);    //mostrando os atributos do atendente
+            atendente.setId(result.getInt("id"));  //igualando o resultado do atendente com o atendente criado
+        atendente.setNome(result.getString("nome"));        //igualando o resultado do atendente com o atendente criado
+         atendente.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
+        atendente.setSetor(result.getString("setor"));
+        System.out.println("Nome = "+ atendente.getNome());    //mostrando os atributos do atendente
+        System.out.println("Idade = "+atendente.getIdade());   //mostrando os atributos do atendente
+        System.out.println("ID = "+ atendente.getId());    //mostrando os atributos do atendente
         System.out.println("----------");
         atendentes.add(atendente); // Adicionando atendente no array
     }
@@ -72,15 +67,15 @@ try {
 return atendentes;  //retornar atendente
 }
 
-
-public boolean updateAtendenteDB(String nome,int idAtendenteDB,int idade){ //atualizar dados do atendente
+public boolean updateAtendente(String nome,int id,int idade,String setor){ //atualizar dados do atendente
 connect();
-String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND idAtendenteDB =?"; //Comando utilizado no Sql transcrevido em TEXTO
+String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND idAtendenteDB =? and setor =?"; //Comando utilizado no Sql transcrevido em TEXTO
 try{
     pst = connection.prepareStatement(sql); //preparando conexao
     pst.setInt(1,idade);     //preparando Query para idade
     pst.setString(2,nome);   // preparando Query para nome
-    pst.setInt (3,idAtendenteDB);   //preparando Query para idAtendenteDB
+    pst.setInt (3,id);   //preparando Query para idAtendenteDB
+    pst.setString(4,setor);
     pst.execute();  //executar
     check = true;  // variavel de controle foi para true
 }catch(SQLException e){  //Se der erro
@@ -97,15 +92,15 @@ try{
 return check; //retornar variavel de controle
 }
 
-
-public boolean deleteAtendenteDB(String nome,int idAtendenteDB,int idade){  //deletar atendentes
+public boolean deleteAtendente(String nome,int id,int idade, String setor){  //deletar atendentes
 connect(); //conexao
-String sql = "DELETE FROM atendenteDB WHERE idAtendenteDB = ? AND nome=? AND idade=?";  //Comando utilizado no Sql transcrevido em TEXTO
+String sql = "DELETE FROM atendenteDB WHERE idAtendenteDB = ? AND nome=? AND idade=? AND setor";  //Comando utilizado no Sql transcrevido em TEXTO
 try{
     pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
-    pst.setInt(1,idAtendenteDB);  //preparando Query para idAtendenteDB
+    pst.setInt(1,id);  //preparando Query para id
     pst.setString(2,nome); // preparando Query para nome
     pst.setInt(3,idade);   // preparando Query para idade
+    pst.setString(4,setor);
     pst.execute();   // executar
     check = true;  //variavel de controle check
 
@@ -123,41 +118,16 @@ try{
 return check;  //retornar variaveld e controle
 }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getIdAtendenteDB() {
-        return idAtendenteDB;
-    }
-
-    public void setIdAtendenteDB(int idAtendenteDB) {
-        this.idAtendenteDB = idAtendenteDB;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-
     //////////////////////////////////////////////////////////
-    public boolean insertPaciente(PacienteDB pacienteDB){ // Inserindo Paciente no banco de dados
+    public boolean insertPaciente(Paciente paciente){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
         String sql = "INSERT INTO pacienteDB(nomePaciente,Sintomas,idade,idPaciente) VALUES(? ,? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO
         try{                    //Comandos utlizados sem o erro
             pst = connection.prepareStatement(sql);   //preparando conexao
-            pst.setString(1,pacienteDB.getNomePaciente());    //preparando Query para nomePaciente
-            pst.setString(2, pacienteDB.getSintomas());        //preparando Query para Sintomas
-            pst.setInt(3,pacienteDB.getIdade());        //preparando Query para idade
-            pst.setInt(4,pacienteDB.getIdPaciente());  //preparando Query para IdPaciente
+            pst.setString(1,paciente.getNomePaciente());    //preparando Query para nomePaciente
+            pst.setString(2, paciente.getSintomas());        //preparando Query para Sintomas
+            pst.setInt(3,paciente.getIdade());        //preparando Query para idade
+            pst.setInt(4,paciente.getIdPaciente());  //preparando Query para IdPaciente
             pst.execute();    // Executar
             check = true;     // passando valor true para check (controle de erro)
         }catch(SQLException e){  // SQLException (Ocorreu erro)
@@ -175,16 +145,16 @@ return check;  //retornar variaveld e controle
         return check;  //retornando check
     }
 
-    public ArrayList<PacienteDB> researchPacientes(){   //selecionar Atendente
+    public ArrayList<Paciente> researchPacientes(){   //selecionar Atendente
         connect();  //conectando
-        ArrayList<PacienteDB> pacientes = new ArrayList<>();  // Criando Array para guardar atendentes
+        ArrayList<Paciente> pacientes = new ArrayList<>();  // Criando Array para guardar atendentes
         String sql = "SELECT * FROM PacienteDB";  //Comando utilizado no Sql transcrevido em TEXTO
         try {
             statement = connection.createStatement();  //Criando variavel para conexao
             result = statement.executeQuery(sql);  // Criando variavel para comparar os resultados
 
             while(result.next()){
-                PacienteDB paciente = new PacienteDB ((result.getString("nomePaciente")),(result.getString("Sintomas")),(result.getInt("idade")),result.getInt("idPaciente")); //Criando atendente com resultados para comparar
+                Paciente paciente = new Paciente ((result.getString("nomePaciente")),(result.getString("Sintomas")),(result.getInt("idade")),result.getInt("idPaciente")); //Criando atendente com resultados para comparar
 
                 paciente.setNomePaciente(result.getString("nomePaciente"));  //igualando o resultado do atendente com o atendente criado
                 paciente.setSintomas(result.getString("sintomas"));       //igualando o resultado do atendente com o atendente criado
@@ -212,7 +182,7 @@ return check;  //retornar variaveld e controle
         return pacientes;  //retornar atendente
     }
 
-    public boolean updatePacienteDB(String nomePaciente,String sintomas,int idade,int idPaciente){ //atualizar dados do atendente
+    public boolean updatePaciente(String nomePaciente,String sintomas,int idade,int idPaciente){ //atualizar dados do atendente
         connect();
         String sql = "UPDATE pacienteDB SET idade =? WHERE nomePaciente=? AND idAtendenteDB =? AND sintomas=?"; //Comando utilizado no Sql transcrevido em TEXTO
         try{
@@ -237,7 +207,7 @@ return check;  //retornar variaveld e controle
         return check; //retornar variavel de controle
     }
 
-    public boolean deletePacienteDB(String nomePaciente,int sintomas,int idade,int idPaciente){  //deletar atendentes
+    public boolean deletePaciente(String nomePaciente,int sintomas,int idade,int idPaciente){  //deletar atendentes
         connect(); //conexao
         String sql = "DELETE FROM pacienteDB WHERE idPaciente = ? AND nomePaciente=? AND idade=? AND sintomas=?";  //Comando utilizado no Sql transcrevido em TEXTO
         try{

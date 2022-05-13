@@ -1,27 +1,26 @@
-package br.inatel.C207;
-
+package br.inatel.C207.DB;
+import br.inatel.C207.DB.Database;
 public class PacienteDB extends Database {
     private String nomePaciente;
     private String sintomas;
     private int idade;
     private int idPaciente;
 
-public PacienteDB(int idPaciente){
-    this.idPaciente = idPaciente;
-}
+    public PacienteDB(int idPaciente){
+        this.idPaciente = idPaciente;
+    }
     public PacienteDB(){
     }
     public PacienteDB(String nomePaciente, String sintomas,int idade,int idPaciente) {
-       this.sintomas = sintomas;
-       this.nomePaciente = nomePaciente;
-       this.idade = idade;
-       this.idPaciente = idPaciente;
+        this.sintomas = sintomas;
+        this.nomePaciente = nomePaciente;
+        this.idade = idade;
+        this.idPaciente = idPaciente;
     }
-public void pedirConsulta(){
-    System.out.println("Pedir consulta");
-
-}
-public void removerUsuario(String nomePaciente){
+    public void pedirConsulta(){
+        System.out.println("Pedir consulta");
+    }
+    public void removerUsuario(String nomePaciente){
         this.nomePaciente = nomePaciente;
     }
 
