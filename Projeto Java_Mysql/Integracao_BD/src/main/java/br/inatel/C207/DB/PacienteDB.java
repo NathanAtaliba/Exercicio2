@@ -5,6 +5,7 @@ public class PacienteDB extends Database {
     private String sintomas;
     private int idade;
     private int idPaciente;
+    private int AtendenteDB_idAtendenteDB;
 
     public PacienteDB(int idPaciente){
         this.idPaciente = idPaciente;

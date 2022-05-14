@@ -4,8 +4,8 @@ import br.inatel.C207.DB.Database;
 
 public abstract class Funcionarios extends Database {
     private String nome;
-    private int idade;
-    private int id;
+    private int idade=0;
+    private int id=0;
     private String setor;
 
     public Funcionarios(String nome, int idade, int id , String setor ) {
@@ -14,7 +14,7 @@ public abstract class Funcionarios extends Database {
         this.setor = setor;
         this.id = id;
     }
-    public void addCadastro(){};
+    public void addPaciente(){};
     public void removerCadastro(){};
     public void fazerCirurgia(){};
     public void mostrarpaciente(){};
