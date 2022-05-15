@@ -5,4 +5,13 @@ public class Medico extends Funcionarios{
         super(nome, idade, id, setor);
     }
 
+    @Override
+    public void fazerCirurgia() {
+        System.out.println("Fazendo cirurgia!");
+    }
+
+    @Override
+    public void fazerCafe() {
+        System.out.println("Fazer café");
+    }
 }

@@ -1,8 +1,10 @@
 package br.inatel.C207.DB;
 import br.inatel.C207.Class.Paciente;
+import br.inatel.C207.Class.Atendente;
+import br.inatel.C207.Class.Medico;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import br.inatel.C207.Class.Atendente;
+
 public class AtendenteDB extends Database {
 public AtendenteDB(){}
     public boolean insertAtendente(Atendente atendente){ // Inserindo Atendente no banco de dados
@@ -30,8 +32,7 @@ pst.close();
 }
 return check;  //retornando check
 }
-
-public ArrayList<Atendente> researchAtendentes(){   //selecionar Atendente
+    public ArrayList<Atendente> researchAtendentes(){   //selecionar Atendente
 connect();  //conectando
 ArrayList<Atendente> atendentes = new ArrayList<>();  // Criando Array para guardar atendentes
 String sql = "SELECT * FROM AtendenteDB";  //Comando utilizado no Sql transcrevido em TEXTO
@@ -66,8 +67,7 @@ try {
 }
 return atendentes;  //retornar atendente
 }
-
-public boolean updateAtendente(String nome,int id,int idade,String setor){ //atualizar dados do atendente
+    public boolean updateAtendente(String nome,int id,int idade,String setor){ //atualizar dados do atendente
 connect();
 String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND idAtendenteDB =? and setor =?"; //Comando utilizado no Sql transcrevido em TEXTO
 try{
@@ -91,8 +91,7 @@ try{
 }
 return check; //retornar variavel de controle
 }
-
-public boolean deleteAtendente(String nome,int id,int idade, String setor){  //deletar atendentes
+    public boolean deleteAtendente(String nome,int id,int idade, String setor){  //deletar atendentes
 connect(); //conexao
 String sql = "DELETE FROM atendenteDB WHERE idAtendenteDB = ? AND nome=? AND idade=? AND setor";  //Comando utilizado no Sql transcrevido em TEXTO
 try{
@@ -146,7 +145,6 @@ return check;  //retornar variaveld e controle
         }
         return check;  //retornando check
     }
-
     public ArrayList<Paciente> researchPacientes(){   //selecionar Atendente
         connect();  //conectando
         ArrayList<Paciente> pacientes = new ArrayList<>();  // Criando Array para guardar atendentes
@@ -183,17 +181,14 @@ return check;  //retornar variaveld e controle
         }
         return pacientes;  //retornar atendente
     }
-
-    public boolean updatePaciente(String nomePaciente,String sintomas,int idade,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
+    public boolean updatePaciente(int idade,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
         connect();
-        String sql = "UPDATE pacienteDB SET idade =? WHERE nomePaciente=? AND idAtendenteDB =? AND sintomas=? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "UPDATE pacienteDB SET idade =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql); //preparando conexao
             pst.setInt(1,idade);     //preparando Query para idade
-            pst.setString(2,nomePaciente);   // preparando Query para nomePaciente
-            pst.setInt (3,idPaciente);   //preparando Query para idPacienteDB
-            pst.setString(4,sintomas); //preparando Query para sintomas
-            pst.setInt(5,AtendenteDB_idAtendenteDB);
+            pst.setInt (2,idPaciente);   //preparando Query para idPacienteDB
+            pst.setInt(3,AtendenteDB_idAtendenteDB);
             pst.execute();  //executar
             check = true;  // variavel de controle foi para true
         }catch(SQLException e){  //Se der erro
@@ -209,13 +204,12 @@ return check;  //retornar variaveld e controle
         }
         return check; //retornar variavel de controle
     }
-
     public boolean deletePaciente(String nomePaciente,int sintomas,int idade,int idPaciente){  //deletar atendentes
         connect(); //conexao
         String sql = "DELETE FROM pacienteDB WHERE idPaciente = ? AND nomePaciente=? AND idade=? AND sintomas=?";  //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
-            pst.setInt(1,idPaciente);  //preparando Query para idAtendenteDB
+            pst.setInt( 1,idPaciente);  //preparando Query para idAtendenteDB
             pst.setString(2,nomePaciente); // preparando Query para nome
             pst.setInt(3,idade);   // preparando Query para idade
             pst.setInt(4,sintomas);
@@ -235,6 +229,117 @@ return check;  //retornar variaveld e controle
         }
         return check;  //retornar variaveld e controle
     }
+    //////////////////////////////////////////////////////////
 
+    public boolean insertMedico(Medico medico){ // Inserindo Paciente no banco de dados
+        connect();    //Conectando no banco
+        String sql = "INSERT INTO medicoDB(nome,idade,id,setor) VALUES(? ,? ,? ,?, ?)";  //Comando utilizado no Sql transcrevido em TEXTO
+        try{                    //Comandos utlizados sem o erro
+
+            pst = connection.prepareStatement(sql);   //preparando conexao
+            pst.setString(1,medico.getNome());    //preparando Query para nomePaciente
+            pst.setInt(2, medico.getIdade());        //preparando Query para Sintomas
+            pst.setInt(3,medico.getId());        //preparando Query para idade
+            pst.setString(4,medico.getSetor());  //preparando Query para IdPaciente
+
+            pst.execute();    // Executar
+            check = true;     // passando valor true para check (controle de erro)
+        }catch(SQLException e){  // SQLException (Ocorreu erro)
+            System.out.println("Erro de operação: " +e.getMessage());   //Mensagem de erro
+            check = false;   //Passando valor pra false para check (Controle de erro)
+        }
+        finally{    // Ao final da execuçao
+            try{
+                connection.close();   //fechar conexao
+                pst.close();
+            }catch(SQLException e){  //Se nao conseguir fechar conexao
+                System.out.println("Erro ao fechar a conexao: "+e.getMessage());  // Erro de encerramento de conexao
+            }
+        }
+        return check;  //retornando check
+    }
+    public ArrayList<Medico> researchMedicos(){   //selecionar Atendente
+        connect();  //conectando
+        ArrayList<Medico> medicos = new ArrayList<>();  // Criando Array para guardar atendentes
+        String sql = "SELECT * FROM medicoDB";  //Comando utilizado no Sql transcrevido em TEXTO
+        try {
+            statement = connection.createStatement();  //Criando variavel para conexao
+            result = statement.executeQuery(sql);  // Criando variavel para comparar os resultados
+
+            while(result.next()){
+                Medico medico = new Medico ((result.getString("nome")),(result.getInt("idade")),(result.getInt("id")),result.getString("setor")); //Criando atendente com resultados para comparar
+
+                medico.setId(result.getInt("id"));  //igualando o resultado do atendente com o atendente criado
+                medico.setNome(result.getString("nome"));        //igualando o resultado do atendente com o atendente criado
+                medico.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
+                medico.setSetor(result.getString("setor"));
+                System.out.println("Nome = "+ medico.getNome());    //mostrando os atributos do atendente
+                System.out.println("Idade = "+ medico.getIdade());   //mostrando os atributos do atendente
+                System.out.println("ID = "+ medico.getId());    //mostrando os atributos do atendente
+                System.out.println("----------");
+                medicos.add(medico); // Adicionando atendente no array
+            }
+        }catch(SQLException e){    //Se der erro
+            System.out.println("Erro de operaçao: " + e.getMessage()); //mostrar mensagem de erro
+        }finally{  //no final faça ...
+            try{
+                connection.close();   //fechar execuçoes usadas pro banco
+                statement.close();    //fechar execuçoes usadas pro banco
+                result.close();      //fechar execuçoes usadas pro banco
+
+            }catch(SQLException e){ //se der erro o fechamento de conexão
+                System.out.println("Erro ao fechar a conexão"+ e.getMessage()); //mostrar mensagem de erro
+            }
+        }
+        return medicos;  //retornar medicos
+    }
+    public boolean updateMedico(int idade,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
+        connect();
+        String sql = "UPDATE medicoDB SET idade =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
+        try{
+            pst = connection.prepareStatement(sql); //preparando conexao
+            pst.setInt(1,idade);     //preparando Query para idade
+            pst.setInt (2,idPaciente);   //preparando Query para idPacienteDB
+            pst.setInt(3,AtendenteDB_idAtendenteDB);
+            pst.execute();  //executar
+            check = true;  // variavel de controle foi para true
+        }catch(SQLException e){  //Se der erro
+            System.out.println("Erro de operação: "+ e.getMessage());  //mostrar mensagem
+            check= false;  // variavel de controle foi para false
+        }finally{  //ao final fechar execuçoes
+            try{
+                connection.close();  //fechar variavel de conexao
+                pst.close();   //fechar variavel de manipulacao
+            }catch(SQLException e){  // se der erro
+                System.out.println("Erro ao fechar a conexão: "+e.getMessage()); // mostrar mensagem de erro
+            }
+        }
+        return check; //retornar variavel de controle
+    }
+    public boolean deleteMedico(String nomePaciente,int idade,int idPaciente){  //deletar atendentes
+        connect(); //conexao
+        String sql = "DELETE FROM medicoDB WHERE idPaciente = ? AND nomePaciente=? AND idade=? ";  //Comando utilizado no Sql transcrevido em TEXTO
+        try{
+            pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
+            pst.setInt( 1,idPaciente);  //preparando Query para idAtendenteDB
+            pst.setString(2,nomePaciente); // preparando Query para nome
+            pst.setInt(3,idade);   // preparando Query para idade
+            pst.execute();   // executar
+            check = true;  //variavel de controle check
+
+        }catch(SQLException e){  // se deu erro na execuçao
+            System.out.println("Erro de operação: "+ e.getMessage());  //mostrar mensagem de erro
+            check = false; //colocar variavel de controle para false
+        }finally{  // ao final..
+            try {
+                connection.close();  // fechar conexao
+                pst.close();  //fechar variavel de manipulacao
+            }catch (SQLException e){  //se der erro
+                System.out.println("Erro ao fechar a conexão "+e.getMessage());  //mostrar mensagem de erro
+            }
+        }
+        return check;  //retornar variaveld e controle
+    }
+    /////////////////////////////////////////////////////////
 }
 

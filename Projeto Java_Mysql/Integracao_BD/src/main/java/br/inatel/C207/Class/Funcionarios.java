@@ -14,10 +14,9 @@ public abstract class Funcionarios extends Database {
         this.setor = setor;
         this.id = id;
     }
-    public void addPaciente(){};
-    public void removerCadastro(){};
+    public abstract void fazerCafe();
+    public void atenderPaciente(){};
     public void fazerCirurgia(){};
-    public void mostrarpaciente(){};
     public String getSetor() {return setor;}
     public void setSetor(String setor) {this.setor = setor;}
     public String getNome() {

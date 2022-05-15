@@ -5,11 +5,13 @@ import  br.inatel.C207.Class.Paciente;
             super(nome, idade, id++, setor);
 
         }
+        public void fazerCafe(){
+            System.out.println("Fazer cafe!");
 
-     //   @Override
-   //     public void addPaciente() {
-//Paciente paciente = new Paciente();
-//paciente.setAtendenteDB_idAtendenteDB(getId());
-  //      }
+        }
+        @Override
+        public void atenderPaciente() {
+            System.out.println("Atender paciente!");
+        }
     }
 
