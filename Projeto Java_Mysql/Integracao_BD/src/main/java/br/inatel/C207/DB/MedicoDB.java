@@ -3,6 +3,8 @@ package br.inatel.C207.DB;
 import java.sql.SQLException;
 
 public class MedicoDB extends Database {
+    public MedicoDB(){
+    }
     public boolean updateMedico(int nome,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
         connect();
         String sql = "UPDATE medicoDB SET nome =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO

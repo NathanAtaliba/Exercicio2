@@ -3,44 +3,8 @@ package br.inatel.C207.DB;
 import java.sql.SQLException;
 
 public class PacienteDB extends Database {
-    private String nomePaciente;
-    private String sintomas;
-    private int idade;
-    private int idPaciente;
-    private int AtendenteDB_idAtendenteDB;
 
-    public PacienteDB(int idPaciente){
-        this.idPaciente = idPaciente;
-    }
     public PacienteDB(){
-    }
-    public PacienteDB(String nomePaciente, String sintomas,int idade,int idPaciente) {
-        this.sintomas = sintomas;
-        this.nomePaciente = nomePaciente;
-        this.idade = idade;
-        this.idPaciente = idPaciente;
-    }
-    public String getNomePaciente() {
-        return nomePaciente;
-    }
-    public void setNomePaciente(String nomePaciente) {
-        this.nomePaciente = nomePaciente;
-    }
-    public String getSintomas() {
-        return sintomas;
-    }
-    public void setSintomas(String sintomas) {
-        this.sintomas = sintomas;
-    }
-    public int getIdade() {
-        return idade;
-    }
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-    public int getIdPacienteDB() {return idPaciente;}
-    public void setIdPacienteDB(int idPaciente) {
-        this.idPaciente = idPaciente;
     }
 
     public boolean updatePaciente(String nomePaciente,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
