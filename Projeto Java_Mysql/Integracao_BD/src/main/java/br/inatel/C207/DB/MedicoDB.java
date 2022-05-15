@@ -29,5 +29,4 @@ public class MedicoDB extends Database {
         return check; //retornar variavel de controle
     }
 
-
 }

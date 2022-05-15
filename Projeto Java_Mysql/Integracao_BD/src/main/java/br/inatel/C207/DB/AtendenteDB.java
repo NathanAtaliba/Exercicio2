@@ -233,7 +233,7 @@ return check;  //retornar variaveld e controle
 
     public boolean insertMedico(Medico medico){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
-        String sql = "INSERT INTO medicoDB(nome,idade,id,setor) VALUES(? ,? ,? ,?, ?)";  //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "INSERT INTO medicoDB(nome,idade,id,setor) VALUES(? ,? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO
         try{                    //Comandos utlizados sem o erro
 
             pst = connection.prepareStatement(sql);   //preparando conexao
