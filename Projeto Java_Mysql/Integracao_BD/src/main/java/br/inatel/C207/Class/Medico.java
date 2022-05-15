@@ -10,7 +10,6 @@ public class Medico extends Funcionarios{
         System.out.println("Fazendo cirurgia!");
     }
 
-    @Override
     public void fazerCafe() {
         System.out.println("Fazer café");
     }

@@ -17,17 +17,13 @@ public abstract class Funcionarios extends Database {
     public abstract void fazerCafe();
     public void atenderPaciente(){};
     public void fazerCirurgia(){};
+
+
     public String getSetor() {return setor;}
     public void setSetor(String setor) {this.setor = setor;}
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public int getIdade() {
-        return idade;
-    }
+    public String getNome() {return nome;}
+    public void setNome(String nome) {this.nome = nome;}
+    public int getIdade() {return idade;}
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}
     public void setIdade(int idade) {
