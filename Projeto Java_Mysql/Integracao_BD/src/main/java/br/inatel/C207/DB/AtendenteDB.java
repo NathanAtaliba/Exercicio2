@@ -47,6 +47,7 @@ try {
         atendente.setNome(result.getString("nome"));        //igualando o resultado do atendente com o atendente criado
          atendente.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
         atendente.setSetor(result.getString("setor"));
+        System.out.println("Atendente: ");
         System.out.println("Nome = "+ atendente.getNome());    //mostrando os atributos do atendente
         System.out.println("Idade = "+atendente.getIdade());   //mostrando os atributos do atendente
         System.out.println("ID = "+ atendente.getId());    //mostrando os atributos do atendente
@@ -160,6 +161,7 @@ return check;  //retornar variaveld e controle
                 paciente.setSintomas(result.getString("sintomas"));       //igualando o resultado do atendente com o atendente criado
                 paciente.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
                 paciente.setIdPaciente(result.getInt("idPaciente")) ;
+                System.out.println("Paciente: ");
                 System.out.println("Nome = "+ paciente.getNomePaciente());    //mostrando os atributos do paciente
                 System.out.println("Idade = "+paciente.getIdade());   //mostrando os atributos do paciente
                 System.out.println("ID = "+ paciente.getIdPaciente());    //mostrando os atributos do paciente
@@ -273,6 +275,7 @@ return check;  //retornar variaveld e controle
                 medico.setNome(result.getString("nome"));        //igualando o resultado do atendente com o atendente criado
                 medico.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
                 medico.setSetor(result.getString("setor"));
+                System.out.println("Medico: ");
                 System.out.println("Nome = "+ medico.getNome());    //mostrando os atributos do atendente
                 System.out.println("Idade = "+ medico.getIdade());   //mostrando os atributos do atendente
                 System.out.println("ID = "+ medico.getId());    //mostrando os atributos do atendente
