@@ -4,8 +4,6 @@ public class Medico extends Funcionarios{
     public Medico(String nome,int idade,int id,String setor){
         super(nome, idade, id, setor);
     }
-
-    @Override
     public void fazerCirurgia() {
         System.out.println("Fazendo cirurgia!");
     }
