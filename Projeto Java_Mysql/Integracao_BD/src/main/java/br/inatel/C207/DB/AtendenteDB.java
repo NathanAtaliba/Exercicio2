@@ -117,7 +117,6 @@ try{
 }
 return check;  //retornar variaveld e controle
 }
-
     //////////////////////////////////////////////////////////
     public boolean insertPaciente(Paciente paciente){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
@@ -232,7 +231,6 @@ return check;  //retornar variaveld e controle
         return check;  //retornar variaveld e controle
     }
     //////////////////////////////////////////////////////////
-
     public boolean insertMedico(Medico medico){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
         String sql = "INSERT INTO medicoDB(nome,idade,id,setor) VALUES(? ,? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO

@@ -9,6 +9,7 @@ import br.inatel.C207.DB.Database;
         private int idade;
         private int idPaciente;
         private int AtendenteDB_idAtendenteDB;
+        private int CadastroDB_IdCadastro;
         public Paciente(int idPaciente){
             this.idPaciente = idPaciente;
         }

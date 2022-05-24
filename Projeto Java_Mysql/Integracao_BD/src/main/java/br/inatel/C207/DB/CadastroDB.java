@@ -1,4 +1,5 @@
 package br.inatel.C207.DB;
 
-public class CadastroDB {
+public class CadastroDB extends Database{
+
 }

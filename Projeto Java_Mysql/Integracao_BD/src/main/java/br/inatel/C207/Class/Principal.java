@@ -14,17 +14,8 @@ Paciente paciente2 = new Paciente("DOIDIN","Resfriado",10,2, atendente2.getId())
 Medico medico1 = new Medico("Nathan",20,2,"Medico");
 Medico medico2 = new Medico("BATIRO",30,1,"Medico");
 at1.insertAtendente(atendente1);
-at1.insertAtendente(atendente2);
 at1.insertPaciente(paciente1);
-at1.insertPaciente(paciente2);
-at1.insertMedico(medico1);
-at1.insertMedico(medico2);
-        System.out.println("");
-        at1.researchPacientes();
-        System.out.println("");
-        at1.researchMedicos();
-        System.out.println("");
-at1.researchAtendentes();
+
 
     }
 }
