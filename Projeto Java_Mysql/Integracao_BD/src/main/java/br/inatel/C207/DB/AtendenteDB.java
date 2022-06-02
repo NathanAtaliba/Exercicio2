@@ -120,15 +120,17 @@ return check;  //retornar variaveld e controle
     //////////////////////////////////////////////////////////
     public boolean insertPaciente(Paciente paciente){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
-        String sql = "INSERT INTO pacienteDB(nomePaciente,Sintomas,idade,idPaciente,AtendenteDB_idAtendenteDB) VALUES(? ,? ,? ,?, ?)";  //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "INSERT INTO pacienteDB(nomePaciente,Sintomas,idade,idPaciente,AtendenteDB_idAtendenteDB,CadastroDB_IdCadastro) VALUES(? ,? ,? ,?, ?, ?)";  //Comando utilizado no Sql transcrevido em TEXTO
         try{                    //Comandos utlizados sem o erro
-
             pst = connection.prepareStatement(sql);   //preparando conexao
             pst.setString(1,paciente.getNomePaciente());    //preparando Query para nomePaciente
             pst.setString(2, paciente.getSintomas());        //preparando Query para Sintomas
             pst.setInt(3,paciente.getIdade());        //preparando Query para idade
             pst.setInt(4,paciente.getIdPaciente());  //preparando Query para IdPaciente
             pst.setInt(5,paciente.getAtendenteDB_idAtendenteDB());
+            pst.setInt(6,paciente.getIdCadastro());
+
+
             pst.execute();    // Executar
             check = true;     // passando valor true para check (controle de erro)
         }catch(SQLException e){  // SQLException (Ocorreu erro)
@@ -154,12 +156,13 @@ return check;  //retornar variaveld e controle
             result = statement.executeQuery(sql);  // Criando variavel para comparar os resultados
 
             while(result.next()){
-                Paciente paciente = new Paciente ((result.getString("nomePaciente")),(result.getString("sintomas")),(result.getInt("idade")),result.getInt("idPaciente"),result.getInt("AtendenteDB_idAtendenteDB")); //Criando atendente com resultados para comparar
+                Paciente paciente = new Paciente ((result.getString("nomePaciente")),(result.getString("sintomas")),(result.getInt("idade")),result.getInt("idPaciente"),result.getInt("AtendenteDB_idAtendenteDB"),result.getInt("CadastroDB_IdCadastro")); //Criando atendente com resultados para comparar
 
                 paciente.setNomePaciente(result.getString("nomePaciente"));  //igualando o resultado do atendente com o atendente criado
                 paciente.setSintomas(result.getString("sintomas"));       //igualando o resultado do atendente com o atendente criado
                 paciente.setIdade(result.getInt("idade"));       //igualando o resultado do atendente com o atendente criado
                 paciente.setIdPaciente(result.getInt("idPaciente")) ;
+
                 System.out.println("Paciente: ");
                 System.out.println("Nome = "+ paciente.getNomePaciente());    //mostrando os atributos do paciente
                 System.out.println("Idade = "+paciente.getIdade());   //mostrando os atributos do paciente
