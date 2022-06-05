@@ -1,18 +1,11 @@
 package br.inatel.C207.Class;
 
 public class Cadastro {
-private int IdCadastro=0;
-    public Cadastro(int IdCadastro){
-        this.IdCadastro = IdCadastro;
-    }
+ private static int IdCadastro=0;
     public int getIdCadastro() {
         return IdCadastro;
     }
-public Cadastro(){
-      IdCadastro++;
+public Cadastro() {
+IdCadastro++;
 }
-
-    public void setIdCadastro(int idCadastro) {
-        IdCadastro = idCadastro;
-    }
 }

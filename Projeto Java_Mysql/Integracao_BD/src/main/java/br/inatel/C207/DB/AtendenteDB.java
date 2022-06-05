@@ -128,7 +128,7 @@ return check;  //retornar variaveld e controle
             pst.setInt(3,paciente.getIdade());        //preparando Query para idade
             pst.setInt(4,paciente.getIdPaciente());  //preparando Query para IdPaciente
             pst.setInt(5,paciente.getAtendenteDB_idAtendenteDB());
-            pst.setInt(6,paciente.getIdCadastro());
+            pst.setInt(6,paciente.getCadastroDB_IdCadastro());
 
 
             pst.execute();    // Executar

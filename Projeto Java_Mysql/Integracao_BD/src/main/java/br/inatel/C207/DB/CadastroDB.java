@@ -1,8 +1,5 @@
 package br.inatel.C207.DB;
-
 import br.inatel.C207.Class.Cadastro;
-import br.inatel.C207.Class.Medico;
-
 import java.sql.SQLException;
 
 public class CadastroDB extends Database{
@@ -10,7 +7,6 @@ public class CadastroDB extends Database{
         connect();    //Conectando no banco
         String sql = "INSERT INTO CadastroDB(idCadastro) VALUES(?)";  //Comando utilizado no Sql transcrevido em TEXTO
         try{                    //Comandos utlizados sem o erro
-
             pst = connection.prepareStatement(sql);   //preparando conexao
             pst.setInt(1,cadastro.getIdCadastro());    //preparando Query para nomePaciente
 

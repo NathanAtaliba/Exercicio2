@@ -1,7 +1,7 @@
 package br.inatel.C207.Class;
 import br.inatel.C207.Class.Atendente;
 
-    public class Paciente extends Cadastro{
+    public class Paciente{
         private String nomePaciente;
         private String sintomas;
         private int idade;
@@ -21,7 +21,7 @@ import br.inatel.C207.Class.Atendente;
             this.idade = idade;
             this.idPaciente = idPaciente;
             this.AtendenteDB_idAtendenteDB = AtendenteDB_idAtendenteDB;
-this.CadastroDB_IdCadastro = CadastroDB_IdCadastro;
+            this.CadastroDB_IdCadastro = CadastroDB_IdCadastro;
 
         }
 
