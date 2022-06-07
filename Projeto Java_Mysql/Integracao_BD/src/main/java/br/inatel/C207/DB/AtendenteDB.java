@@ -1,4 +1,5 @@
 package br.inatel.C207.DB;
+import br.inatel.C207.Class.Funcionarios;
 import br.inatel.C207.Class.Paciente;
 import br.inatel.C207.Class.Atendente;
 import br.inatel.C207.Class.Medico;
@@ -234,7 +235,7 @@ return check;  //retornar variaveld e controle
         return check;  //retornar variaveld e controle
     }
     //////////////////////////////////////////////////////////
-    public boolean insertMedico(Medico medico){ // Inserindo Paciente no banco de dados
+    public boolean insertMedico(Funcionarios medico){ // Inserindo Paciente no banco de dados
         connect();    //Conectando no banco
         String sql = "INSERT INTO medicoDB(nome,idade,id,setor) VALUES(? ,? ,? ,?)";  //Comando utilizado no Sql transcrevido em TEXTO
         try{                    //Comandos utlizados sem o erro
@@ -297,14 +298,15 @@ return check;  //retornar variaveld e controle
         }
         return medicos;  //retornar medicos
     }
-    public boolean updateMedico(int idade,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
+    public boolean updateMedico(String nome,int idade,int id,String Setor ){ //atualizar dados do atendente
         connect();
-        String sql = "UPDATE medicoDB SET idade =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "UPDATE medicoDB SET idade =? WHERE id =? AND nome=? AND Setor=?"; //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql); //preparando conexao
             pst.setInt(1,idade);     //preparando Query para idade
-            pst.setInt (2,idPaciente);   //preparando Query para idPacienteDB
-            pst.setInt(3,AtendenteDB_idAtendenteDB);
+            pst.setInt (2,id);   //preparando Query para idPacienteDB
+            pst.setString(3,nome);
+            pst.setString(4,Setor);
             pst.execute();  //executar
             check = true;  // variavel de controle foi para true
         }catch(SQLException e){  //Se der erro
@@ -320,14 +322,15 @@ return check;  //retornar variaveld e controle
         }
         return check; //retornar variavel de controle
     }
-    public boolean deleteMedico(String nomePaciente,int idade,int idPaciente){  //deletar atendentes
+    public boolean deleteMedico(String nome,int idade,int id,String Setor){  //deletar medicos
         connect(); //conexao
-        String sql = "DELETE FROM medicoDB WHERE idPaciente = ? AND nomePaciente=? AND idade=? ";  //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "DELETE FROM medicoDB WHERE id = ? AND nome=? AND idade=? AND Setor=? ";  //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
-            pst.setInt( 1,idPaciente);  //preparando Query para idAtendenteDB
-            pst.setString(2,nomePaciente); // preparando Query para nome
+            pst.setInt( 1,id);  //preparando Query para idMedico
+            pst.setString(2,nome); // preparando Query para nome
             pst.setInt(3,idade);   // preparando Query para idade
+            pst.setString(4,Setor); // preparando Query para Setor
             pst.execute();   // executar
             check = true;  //variavel de controle check
 

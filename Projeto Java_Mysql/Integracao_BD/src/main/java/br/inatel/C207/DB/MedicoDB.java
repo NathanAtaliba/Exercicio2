@@ -5,14 +5,14 @@ import java.sql.SQLException;
 public class MedicoDB extends Database {
     public MedicoDB(){
     }
-    public boolean updateMedico(int nome,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
+    public boolean updateMedico(String nome,int idade,String Setor){ //atualizar dados do atendente
         connect();
         String sql = "UPDATE medicoDB SET nome =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql); //preparando conexao
-            pst.setInt(1,nome);     //preparando Query para idade
-            pst.setInt (2,idPaciente);   //preparando Query para idPacienteDB
-            pst.setInt(3,AtendenteDB_idAtendenteDB);
+            pst.setString(1,nome);     //preparando Query para nome
+            pst.setInt (2,idade);   //preparando Query para idade
+                pst.setString(3,Setor); //preparando Query para Setor
             pst.execute();  //executar
             check = true;  // variavel de controle foi para true
         }catch(SQLException e){  //Se der erro

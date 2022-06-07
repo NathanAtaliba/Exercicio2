@@ -5,27 +5,34 @@ import br.inatel.C207.DB.PacienteDB;
 import br.inatel.C207.DB.MedicoDB;
 public class Principal {
     public static void main(String[] args){
-AtendenteDB at1 = new AtendenteDB();
-PacienteDB p1 = new PacienteDB();
-CadastroDB cadastro = new CadastroDB();
-MedicoDB m1 = new MedicoDB();
 
-        Cadastro c1 = new Cadastro();
-        cadastro.insertCadastro(c1);
-        Atendente atendente1 = new Atendente("Nathan",20,1,"Atendimento");
-Atendente atendente2 = new Atendente("OLOCO",30,2,"Atendimento");
-Paciente paciente1 = new Paciente("Renan","Dor",20,1, atendente1.getId(), c1.getIdCadastro());
-        Cadastro c2 = new Cadastro();
-        cadastro.insertCadastro(c2);
-Paciente paciente2 = new Paciente("DOIDIN","Resfriado",10,2, atendente1.getId(),c2.getIdCadastro());
-Medico medico1 = new Medico("Nathan",20,2,"Medico");
-Medico medico2 = new Medico("BATIRO",30,1,"Medico");
-cadastro.insertCadastro(c1);
-at1.insertAtendente(atendente1);
-at1.insertMedico(medico1);
-        at1.insertPaciente(paciente1);
-        at1.insertPaciente(paciente2);
-at1.researchPacientes();
+AtendenteDB at1 = new AtendenteDB(); //Instanciando um atendente para usar o CRUD
+PacienteDB p1 = new PacienteDB(); // Instanciando um paciente pra atualizar o nome do paciente
+CadastroDB cadastro = new CadastroDB(); //Instanciando um cadastro para salvar no paciente
+MedicoDB m1 = new MedicoDB(); // Instanciando um medico pra atualizar o nome do medico
+        Cadastro cadastro1 = new Cadastro();  //Instanciando um paciente para tabela
+        cadastro.insertCadastro(cadastro1);  //Inserindo um cadastro no banco de dados
+        Atendente atendente1 = new Atendente("Nathan",20,1,"Atendimento"); //Criando primeiro atendente
+Atendente atendente2 = new Atendente("OLOCO",30,2,"Atendimento"); // Criando segundo atendente
+Paciente paciente1 = new Paciente("Renan","Dor",20,1, atendente1.getId(), cadastro1.getIdCadastro());//Criando o primeiro paciente
+        Cadastro cadastro2 = new Cadastro(); //Criando um novo cadastro
+        cadastro.insertCadastro(cadastro1); //Inserindo novo cadastro
+Paciente paciente2 = new Paciente("DOIDIN","Resfriado",10,2, atendente1.getId(),cadastro2.getIdCadastro()); //Criando o segundo paciente
+Funcionarios medico1 = new Medico("Nathan",20,2,"Medico"); //Criando o primeiro medico
+Funcionarios medico2 = new Medico("BATIRO",30,1,"Medico"); //Criando o segundo medico
+cadastro.insertCadastro(cadastro2); //Inserindo um novo cadastro
+
+
+        at1.insertAtendente(atendente1); //Inserindo um novo atendente
+        at1.insertMedico(medico1); //Inserindo um novo medico no banco de dados
+        at1.insertPaciente(paciente1); //Inserindo um novo paciente no banco de dados
+        at1.insertPaciente(paciente2); //Inserindo um novo paciente no banco de dados
+        at1.researchPacientes(); //Mostrando os pacientes via terminal
+        at1.researchAtendentes();  //Mostrando os atendentes via terminal
+        at1.researchMedicos();  //Mostrando os medicos via terminal
+       //p1.updatePaciente("Renan",1,1);
+       //m1.updateMedico("Nathan",20,"Medico");
+
 
     }
 }
