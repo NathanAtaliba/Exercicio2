@@ -4,6 +4,7 @@ import  br.inatel.C207.Class.Paciente;
         public Atendente(String nome,int idade,int id,String setor){
             super(nome, idade, id++, setor);
         }
+
         public void fazerCafe(){
             System.out.println("Fazer cafe!");
 

@@ -5,18 +5,31 @@ import br.inatel.C207.Class.Atendente;
 import br.inatel.C207.Class.Medico;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 public class AtendenteDB extends Database {
+    Scanner input = new Scanner(System.in);
 public AtendenteDB(){}
     public boolean insertAtendente(Atendente atendente){ // Inserindo Atendente no banco de dados
+    Scanner input = new Scanner(System.in);
 connect();    //Conectando no banco
 String sql = "INSERT INTO atendenteDB(nome,idade,id,setor) VALUES(? ,? ,? , ?)";  //Comando utilizado no Sql transcrevido em TEXTO
 try{                    //Comandos utlizados sem o erro
     pst = connection.prepareStatement(sql);   //preparando conexao
-    pst.setInt(3,atendente.getId());   // //preparando Query para idAtendenteDB
+    System.out.println("Entre com o id: ");
+    atendente.setId(input.nextInt());
+    pst.setInt(3,atendente.getId());  //preparando Query para idAtendenteDB
+    System.out.println("Entre com o nome: ");
+    atendente.setNome(input.next());
+    input.next();
     pst.setString(1, atendente.getNome());       //preparando Query para nome
+    System.out.println("Entre com a idade: ");
+    atendente.setIdade(input.nextInt());
     pst.setInt(2,atendente.getIdade());         //preparando Query para idade
+    System.out.println("Entre com o setor: ");
+    atendente.setSetor(input.next());
     pst.setString(4,atendente.getSetor());  //preparando Query para setor
+    //atendente = new Atendente(atendente.getNome(),atendente.getIdade(),atendente.getId(),atendente.getSetor());
+    input.next();
     pst.execute();    // Executar
     check = true;     // passando valor true para check (controle de erro)
 }catch(SQLException e){  // SQLException (Ocorreu erro)
