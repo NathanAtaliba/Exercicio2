@@ -15,21 +15,21 @@ connect();    //Conectando no banco
 String sql = "INSERT INTO atendenteDB(nome,idade,id,setor) VALUES(? ,? ,? , ?)";  //Comando utilizado no Sql transcrevido em TEXTO
 try{                    //Comandos utlizados sem o erro
     pst = connection.prepareStatement(sql);   //preparando conexao
-    System.out.println("Entre com o id: ");
+    System.out.println("Entre com os atributos do novo atendente:");
+    System.out.println("Entre com o id:");
     atendente.setId(input.nextInt());
     pst.setInt(3,atendente.getId());  //preparando Query para idAtendenteDB
-    System.out.println("Entre com o nome: ");
+    System.out.println("Entre com o nome:");
     atendente.setNome(input.next());
-    input.next();
-    pst.setString(1, atendente.getNome());       //preparando Query para nome
-    System.out.println("Entre com a idade: ");
+    input.nextLine();
+    pst.setString(1, atendente.getNome());       //preparando Query para
+    System.out.println("Entre com a idade:");
     atendente.setIdade(input.nextInt());
     pst.setInt(2,atendente.getIdade());         //preparando Query para idade
-    System.out.println("Entre com o setor: ");
+    System.out.println("Entre com o setor:");
     atendente.setSetor(input.next());
+    input.nextLine();
     pst.setString(4,atendente.getSetor());  //preparando Query para setor
-    //atendente = new Atendente(atendente.getNome(),atendente.getIdade(),atendente.getId(),atendente.getSetor());
-    input.next();
     pst.execute();    // Executar
     check = true;     // passando valor true para check (controle de erro)
 }catch(SQLException e){  // SQLException (Ocorreu erro)
@@ -82,15 +82,26 @@ try {
 }
 return atendentes;  //retornar atendente
 }
-    public boolean updateAtendente(String nome,int id,int idade,String setor){ //atualizar dados do atendente
+    public boolean updateAtendente(Atendente atendente){ //atualizar dados do atendente
 connect();
-String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND idAtendenteDB =? and setor =?"; //Comando utilizado no Sql transcrevido em TEXTO
+String sql = "UPDATE atendenteDB SET idade =? WHERE nome=? AND id =? and setor =?"; //Comando utilizado no Sql transcrevido em TEXTO
 try{
     pst = connection.prepareStatement(sql); //preparando conexao
-    pst.setInt(1,idade);     //preparando Query para idade
-    pst.setString(2,nome);   // preparando Query para nome
-    pst.setInt (3,id);   //preparando Query para idAtendenteDB
-    pst.setString(4,setor);
+    System.out.println("Atualizando idade do atendente:");
+    System.out.println("Entre com a nova idade que o atendente tera: ");
+    atendente.setIdade(input.nextInt());
+    pst.setInt(1,atendente.getIdade());     //preparando Query para idade
+    System.out.println("Entre com o nome que o atendente tem: ");
+    atendente.setNome(input.next());
+    input.nextLine();
+    pst.setString(2,atendente.getNome());   // preparando Query para nome
+    System.out.println("Entre com o id que o atendente tem: ");
+    atendente.setId(input.nextInt());
+    pst.setInt (3,atendente.getId());   //preparando Query para idAtendenteDB
+    System.out.println("Entre com o setor que o atendente tem: ");
+    atendente.setSetor(input.next());
+    input.nextLine();
+    pst.setString(4,atendente.getSetor());
     pst.execute();  //executar
     check = true;  // variavel de controle foi para true
 }catch(SQLException e){  //Se der erro
@@ -106,15 +117,24 @@ try{
 }
 return check; //retornar variavel de controle
 }
-    public boolean deleteAtendente(String nome,int id,int idade, String setor){  //deletar atendentes
+    public boolean deleteAtendente(Atendente atendente){  //deletar atendentes
 connect(); //conexao
-String sql = "DELETE FROM atendenteDB WHERE idAtendenteDB = ? AND nome=? AND idade=? AND setor";  //Comando utilizado no Sql transcrevido em TEXTO
+String sql = "DELETE FROM atendenteDB WHERE id = ? AND nome=? AND idade=? AND setor=?";  //Comando utilizado no Sql transcrevido em TEXTO
 try{
     pst = connection.prepareStatement(sql);  //preparando conexao com texto sql
-    pst.setInt(1,id);  //preparando Query para id
-    pst.setString(2,nome); // preparando Query para nome
-    pst.setInt(3,idade);   // preparando Query para idade
-    pst.setString(4,setor);
+    System.out.println("Entre com o id do antendente que deseja remover:");
+    atendente.setId(input.nextInt());
+    pst.setInt(1,atendente.getId());  //preparando Query para id
+    System.out.println("Entre com o nome do antendente que deseja remover:");
+    atendente.setNome(input.next());
+    input.nextLine();
+    pst.setString(2,atendente.getNome()); // preparando Query para nome
+    System.out.println("Entre com a idade do antendente que deseja remover:");
+    atendente.setIdade(input.nextInt());
+    pst.setInt(3,atendente.getIdade());   // preparando Query para idade
+    System.out.println("Entre com o setor do antendente que deseja remover:");
+    atendente.setSetor(input.next());
+    pst.setString(4,atendente.getSetor());
     pst.execute();   // executar
     check = true;  //variavel de controle check
 
