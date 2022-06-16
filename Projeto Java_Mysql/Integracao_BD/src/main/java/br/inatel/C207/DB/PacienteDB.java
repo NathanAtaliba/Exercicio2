@@ -7,14 +7,14 @@ public class PacienteDB extends Database {
     public PacienteDB(){
     }
 
-    public boolean updatePaciente(String nomePaciente,int idPaciente,int AtendenteDB_idAtendenteDB){ //atualizar dados do atendente
+    public boolean updatePaciente(String nomePaciente,int idPaciente,int idade){ //atualizar dados do atendente
         connect();
-        String sql = "UPDATE pacienteDB SET nomePaciente =? WHERE idPaciente =? AND AtendenteDB_idAtendenteDB=?"; //Comando utilizado no Sql transcrevido em TEXTO
+        String sql = "UPDATE pacienteDB SET nomePaciente =? WHERE idPaciente =? AND idade=?"; //Comando utilizado no Sql transcrevido em TEXTO
         try{
             pst = connection.prepareStatement(sql); //preparando conexao
             pst.setString(1,nomePaciente);   // preparando Query para nomePaciente
             pst.setInt (2,idPaciente);   //preparando Query para idPacienteDB
-            pst.setInt(3,AtendenteDB_idAtendenteDB);
+            pst.setInt(3,idade);
             pst.execute();  //executar
             check = true;  // variavel de controle foi para true
         }catch(SQLException e){  //Se der erro
