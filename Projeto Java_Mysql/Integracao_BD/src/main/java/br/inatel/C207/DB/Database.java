@@ -10,7 +10,7 @@ public abstract class Database {
     PreparedStatement pst; // objeto responsável por preparar querys de manipulação dinâmica(INSERT, UPDATE, DELETE)
 
     static final String user = "root"; // usuário da instância local do servidor
-    static final String password = "Oufreds2s2-"; // senha do usuário da instância local do servidor
+    static final String password = "-"; // senha do usuário da instância local do servidor
     static final String database = "mydb"; // nome do banco de dados a ser utilizado
 
     // String com URL de conexão com o servidor
